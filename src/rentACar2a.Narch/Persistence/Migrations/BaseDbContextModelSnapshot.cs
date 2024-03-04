@@ -54,13 +54,13 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
 
-                    b.Property<int>("CarState")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ColorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Renk");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -69,17 +69,26 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Kilometer")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Km");
 
                     b.Property<Guid>("ModelId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ModelId");
 
-                    b.Property<int>("ModelYear")
-                        .HasColumnType("int");
+                    b.Property<short>("ModelYear")
+                        .HasColumnType("smallint")
+                        .HasColumnName("ModelYearr");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Ad");
+
+                    b.Property<string>("Plate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Plate");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -215,7 +224,8 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -225,7 +235,8 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -279,35 +290,38 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
 
                     b.Property<Guid>("BrandId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("BrandId");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("DailyPrice")
-                        .HasColumnType("float");
+                    b.Property<decimal>("DailyPrice")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("DailyPrice");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("FuelId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("FuelId");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Name");
 
                     b.Property<Guid>("TransmissionId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("TransmissionId");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<short>("Year")
-                        .HasColumnType("smallint");
 
                     b.HasKey("Id");
 
@@ -594,7 +608,8 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -604,7 +619,8 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -659,12 +675,12 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e10997bf-51f9-4a0c-8f0f-47a1f400726f"),
+                            Id = new Guid("d0bc16a0-1264-44bc-b11e-0992d6cfd718"),
                             AuthenticatorType = 0,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "narch@kodlama.io",
-                            PasswordHash = new byte[] { 202, 20, 194, 69, 209, 185, 65, 86, 95, 14, 33, 230, 136, 86, 226, 156, 96, 238, 48, 172, 224, 21, 81, 213, 167, 232, 5, 46, 12, 68, 30, 192, 27, 196, 77, 7, 53, 79, 182, 128, 180, 149, 134, 48, 94, 140, 228, 2, 42, 72, 111, 149, 149, 211, 168, 59, 173, 7, 25, 131, 219, 183, 214, 177 },
-                            PasswordSalt = new byte[] { 244, 10, 74, 194, 171, 255, 241, 200, 134, 194, 194, 221, 165, 65, 108, 176, 107, 84, 164, 29, 174, 4, 1, 67, 214, 154, 161, 221, 143, 201, 123, 106, 64, 131, 203, 52, 177, 124, 109, 175, 247, 86, 27, 253, 51, 78, 155, 238, 209, 39, 110, 87, 24, 171, 23, 123, 254, 113, 13, 51, 238, 28, 77, 201, 158, 186, 96, 242, 119, 180, 79, 208, 50, 134, 67, 35, 235, 44, 29, 139, 209, 114, 64, 22, 187, 186, 99, 205, 35, 101, 149, 252, 40, 126, 16, 97, 171, 188, 229, 63, 152, 131, 172, 170, 156, 204, 19, 74, 108, 72, 191, 25, 65, 180, 147, 47, 116, 251, 30, 72, 179, 0, 188, 9, 183, 102, 146, 111 }
+                            PasswordHash = new byte[] { 178, 84, 28, 85, 89, 9, 54, 35, 219, 185, 127, 229, 67, 167, 44, 200, 29, 201, 39, 173, 225, 165, 243, 3, 20, 52, 95, 244, 185, 120, 84, 48, 235, 2, 132, 7, 51, 36, 249, 134, 2, 55, 165, 231, 2, 178, 179, 67, 101, 136, 140, 115, 67, 109, 249, 81, 167, 48, 178, 43, 44, 109, 62, 80 },
+                            PasswordSalt = new byte[] { 164, 123, 242, 106, 192, 129, 127, 107, 253, 200, 201, 253, 51, 17, 125, 91, 163, 187, 228, 24, 94, 114, 153, 227, 183, 44, 16, 16, 237, 110, 234, 7, 158, 98, 172, 177, 208, 113, 91, 211, 158, 25, 84, 240, 64, 130, 244, 248, 147, 102, 207, 11, 196, 241, 187, 173, 11, 175, 193, 36, 180, 138, 23, 137, 160, 117, 125, 215, 207, 69, 136, 71, 45, 189, 5, 109, 109, 21, 111, 71, 21, 0, 235, 60, 185, 172, 193, 76, 9, 118, 35, 80, 19, 125, 61, 114, 117, 196, 69, 164, 23, 252, 194, 143, 230, 120, 248, 148, 154, 46, 173, 216, 144, 230, 253, 197, 197, 252, 221, 29, 112, 111, 110, 27, 29, 174, 22, 91 }
                         });
                 });
 
@@ -706,10 +722,10 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a47e1356-c2b3-4f40-ba01-be10bf9524ee"),
+                            Id = new Guid("11683a11-3675-4f6b-9ba4-c37cc295adf1"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OperationClaimId = 1,
-                            UserId = new Guid("e10997bf-51f9-4a0c-8f0f-47a1f400726f")
+                            UserId = new Guid("d0bc16a0-1264-44bc-b11e-0992d6cfd718")
                         });
                 });
 

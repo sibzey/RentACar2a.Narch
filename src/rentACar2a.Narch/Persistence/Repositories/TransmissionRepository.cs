@@ -7,7 +7,5 @@ namespace Persistence.Repositories;
 
 public class TransmissionRepository : EfRepositoryBase<Transmission, Guid, BaseDbContext>, ITransmissionRepository
 {
-    public TransmissionRepository(BaseDbContext context) : base(context)
-    {
-    }
+    public TransmissionRepository(BaseDbContext context) : base(context) { }
 }

@@ -10,6 +10,7 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
     {
         builder.HasKey(b => b.Id);
         builder.ToTable("Brands");
+        
     }
 }
 

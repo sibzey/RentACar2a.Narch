@@ -7,7 +7,5 @@ namespace Persistence.Repositories;
 
 public class IndividualCustomerRepository : EfRepositoryBase<IndividualCustomer, Guid, BaseDbContext>, IIndividualCustomerRepository
 {
-    public IndividualCustomerRepository(BaseDbContext context) : base(context)
-    {
-    }
+    public IndividualCustomerRepository(BaseDbContext context) : base(context) { }
 }
