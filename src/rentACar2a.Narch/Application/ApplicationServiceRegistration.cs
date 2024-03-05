@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NArchitecture.Core.Application.Pipelines.Authorization;
 using NArchitecture.Core.Application.Pipelines.Caching;
 using NArchitecture.Core.Application.Pipelines.Logging;
+using NArchitecture.Core.Application.Pipelines.Performance;
 using NArchitecture.Core.Application.Pipelines.Transaction;
 using NArchitecture.Core.Application.Pipelines.Validation;
 using NArchitecture.Core.Application.Rules;
@@ -19,6 +20,9 @@ using NArchitecture.Core.Localization.Resource.Yaml.DependencyInjection;
 using NArchitecture.Core.Mailing;
 using NArchitecture.Core.Mailing.MailKit;
 using NArchitecture.Core.Security.DependencyInjection;
+using System;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Application;
 
@@ -32,13 +36,17 @@ public static class ApplicationServiceRegistration
     )
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        
+        services.AddScoped<Stopwatch>();
+        
         services.AddMediatR(configuration =>
         {
             configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
+            configuration.AddOpenBehavior(typeof(PerformanceBehavior<,>));
             configuration.AddOpenBehavior(typeof(AuthorizationBehavior<,>));
             configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
             configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
-            configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
             configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
             configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
         });
