@@ -9,4 +9,6 @@ public class IndividualCustomer : Entity<Guid>
     public string Password { get; set; }
     public string Email { get; set; }
     public string NationalIdentity { get; set; }
+    public Guid CustomerId { get; set; }
+    public virtual Customer Customer  { get; set; }
 }

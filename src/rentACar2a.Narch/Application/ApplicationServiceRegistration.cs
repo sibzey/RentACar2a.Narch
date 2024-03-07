@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Application.Services.AuthenticatorService;
 using Application.Services.AuthService;
 using Application.Services.UsersService;
@@ -23,6 +23,11 @@ using NArchitecture.Core.Security.DependencyInjection;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using Application.Services.Customers;
+using Application.Services.CorporateCustomers;
+using Application.Services.IndividualCustomers;
+
+
 
 namespace Application;
 
@@ -66,7 +71,10 @@ public static class ApplicationServiceRegistration
         services.AddYamlResourceLocalization();
 
         services.AddSecurityServices<Guid, int>();
-
+        
+        services.AddScoped<ICustomerService, CustomerManager>();
+        services.AddScoped<ICorporateCustomerService, CorporateCustomerManager>();
+        services.AddScoped<IIndividualCustomerService, IndividualCustomerManager>();
         return services;
     }
 
